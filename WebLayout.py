@@ -14,7 +14,7 @@ class WebLayout(QVBoxLayout):
         self.createLayouts()
 
         self.urlBar.returnPressed.connect(self.goToPage)
-        self.webView.loadFinished.connect(self.resultAvailable)
+        self.webView.loadFinished.connect(self.updateView)
 
     def createLayouts(self):
         self.backButton = QPushButton("←")
@@ -40,6 +40,6 @@ class WebLayout(QVBoxLayout):
             self.webView.load(QUrl(self.homePage))
             self.urlBar.setText(self.homePage)
 
-    def resultAvailable(self):
-        frame = self.webView.page().mainFrame()
-        print(frame.toHtml().encode('utf-8'))
+    def updateView(self):
+        self.webView.page().mainFrame()
+        print(self.webView.title())
